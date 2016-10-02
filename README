@@ -3,11 +3,13 @@ It supports all hash algorithms supported by pythons hashlib module.
 Start by python PythonFileHashChecker.py.py --file
 Optionaly you can use:
  "--hashtype" to specify which algorithm you want to use such as md5 sha 256 etc etc
+ If you dont it will default to md5.
  or
  "--list" to specify a text file with a list containing "*file* *hash*" for this script to run against and compaire
+ if you dont it will just output you files hash.
 
 For example:
 
-    python PythonFileHashChecker.py.py --file os.iso --list os-iso-hashes.txt --sha256
+    python PythonFileHashChecker.py --file os.iso --list os-iso-hashes.txt --sha256
 This will get the sha256 of our iso file and look for the file name(os.iso) in the text file and then compaire the hash on the
 same line as the file name to our copy of the file.
