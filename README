@@ -6,7 +6,7 @@ Optionaly you can use:
  If you dont it will default to md5.
  or
  "--list" to specify a text file with a list containing "*file* *hash*" for this script to run against and compaire
- if you dont it will just output you files hash.
+ if you dont it will just output your files hash.
 
 For example:
 
