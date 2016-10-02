@@ -31,7 +31,6 @@ filehash = filehash.hexdigest()
 # If user selected a list
 # Search text file for file name + hash
 if args.list:
-    do_print = False
     # If filename is in the list
     for line in open(args.list, 'r'):
         if filename in line:
@@ -40,7 +39,7 @@ if args.list:
 # If a file and hash list where given compaire
 if args.file and args.list:
     fileplushash = txtline.split()
-    givenfilename, correcthash = fileplushash[0],fileplushash[1]
+    filenameinlist, correcthash = fileplushash[0],fileplushash[1]
     # Debug
     # print list[1]
     print "the file"
