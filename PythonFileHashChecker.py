@@ -45,8 +45,6 @@ if args.list:
 if args.file and args.list:
     fileplushash = txtline.split()
     filenameinlist, correcthash = fileplushash[0],fileplushash[1]
-    # Debug
-    # print list[1]
     print("the file")
     print(filename) 
     print("has the hash:")
