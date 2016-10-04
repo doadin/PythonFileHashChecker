@@ -43,19 +43,26 @@ if args.list:
 
 # If a file and hash list where given compaire
 if args.file and args.list:
-    fileplushash = txtline.split()
-    filenameinlist, correcthash = fileplushash[0],fileplushash[1]
-    print("the file")
-    print(filename) 
-    print("has the hash:")
-    print(filehash)
-    print("correct hash is:")
-    print(correcthash)
-    # Compair Hashes
-    if filehash == correcthash:
-        print("Hashes match file is safe!")
-    else:
-        print(" Hashes DO NOT match file is corrupt!")
+    try:
+        fileplushash = txtline.split()
+        filenameinlist, correcthash = fileplushash[0],fileplushash[1]
+        print("the file")
+        print(filename) 
+        print("has the hash:")
+        print(filehash)
+        print("correct hash is:")
+        print(correcthash)
+        # Compair Hashes
+        if filehash == correcthash:
+            print("Hashes match file is safe!")
+        else:
+            print(" Hashes DO NOT match file is corrupt!")
+    except NameError:
+        print("File Not Found In List!")
+        print("the file")
+        print(filename) 
+        print("has the hash:")
+        print(filehash)
 else:
     print("your file:")
     print(filename)
