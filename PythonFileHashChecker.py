@@ -15,7 +15,6 @@ if len(sys.argv) == 1:
 args = parser.parse_args()
 
 if args.file:
-    selectedfile = args.file
     filename = os.path.basename(args.file)
 
 if args.hashtype:
