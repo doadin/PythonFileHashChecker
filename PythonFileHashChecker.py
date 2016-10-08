@@ -3,11 +3,13 @@ import hashlib
 import os
 import sys
 
-parser = argparse.ArgumentParser(description='Python Program to check hash or file checksum.')
+parser = argparse.ArgumentParser(description='Python Program to check hash or'
+                                             ' file checksum.')
 parser.add_argument("--file", help="File you want the hash for.")
-parser.add_argument("--hashtype", help="Type of hash you want.MD5 SHA etc etc..")
-parser.add_argument("--list", help="Text file containing file name + hash to check against.")
-if len(sys.argv)==1:
+parser.add_argument("--hashtype", help="Type of hash you want.MD5 SHA etc etc")
+parser.add_argument("--list", help="Text file containing file name + hash to"
+                                   " check against.")
+if len(sys.argv) == 1:
     parser.print_help()
     sys.exit(1)
 args = parser.parse_args()
@@ -17,12 +19,12 @@ if args.file:
     filename = os.path.basename(args.file)
 
 if args.hashtype:
-    if sys.version_info >= (3,0):
+    if sys.version_info >= (3, 0):
         if args.hashtype not in hashlib.algorithms_available:
-                raise NameError('The algorithm you specified is not supported')
+            raise NameError('The algorithm you specified is not supported')
     else:
         if args.hashtype not in hashlib.algorithms:
-                raise NameError('The algorithm you specified is not supported')
+            raise NameError('The algorithm you specified is not supported')
 else:
     if args.file:
         print("--hashtype not supplied defaulting to md5")
@@ -31,7 +33,7 @@ else:
 if args.list:
     # Generate the selected files hash
     filehash = hashlib.new(args.hashtype)
-    with open( args.file , "rb" ) as f:
+    with open(args.file, "rb") as f:
         while True:
             buf = f.read(4096)
             if not buf:
@@ -51,9 +53,9 @@ if args.list:
 if args.file and args.list:
     try:
         fileplushash = txtline.split()
-        filenameinlist, correcthash = fileplushash[0],fileplushash[1]
+        filenameinlist, correcthash = fileplushash[0], fileplushash[1]
         print("the file")
-        print(filename) 
+        print(filename)
         print("has the hash:")
         print(filehash)
         print("correct hash is:")
@@ -66,7 +68,7 @@ if args.file and args.list:
     except NameError:
         print("File Not Found In List!")
         print("the file")
-        print(filename) 
+        print(filename)
         print("has the hash:")
         print(filehash)
 else:
@@ -75,4 +77,3 @@ else:
         print(filename)
         print("has a hash of:")
         print(filehash)
-
