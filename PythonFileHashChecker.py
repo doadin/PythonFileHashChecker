@@ -9,8 +9,9 @@ parser.add_argument("--hashtype", help="Type of hash you want.(MD5 SHA etc etc..
 parser.add_argument("--list", help="Text file containing file name + hash to check against.")
 args = parser.parse_args()
 
-selectedfile = args.file
-filename = os.path.basename(args.file)
+if args.file:
+    selectedfile = args.file
+    filename = os.path.basename(args.file)
 
 if args.hashtype:
     if sys.version_info >= (3,0):
@@ -20,18 +21,20 @@ if args.hashtype:
         if args.hashtype not in hashlib.algorithms:
                 raise NameError('The algorithm you specified is not supported')
 else:
-    print("--hashtype not supplied defaulting to md5")
-    args.hashtype = "MD5"
+    if args.file:
+        print("--hashtype not supplied defaulting to md5")
+        args.hashtype = "MD5"
 
-# Generate the selected files hash
-filehash = hashlib.new(args.hashtype)
-with open( args.file , "rb" ) as f:
-    while True:
-        buf = f.read(4096)
-        if not buf:
-            break
-        filehash.update(buf)
-filehash = filehash.hexdigest()
+if args.list:
+    # Generate the selected files hash
+    filehash = hashlib.new(args.hashtype)
+    with open( args.file , "rb" ) as f:
+        while True:
+            buf = f.read(4096)
+            if not buf:
+                break
+            filehash.update(buf)
+    filehash = filehash.hexdigest()
 
 # If user selected a list
 # Search text file for file name + hash
@@ -64,8 +67,9 @@ if args.file and args.list:
         print("has the hash:")
         print(filehash)
 else:
-    print("your file:")
-    print(filename)
-    print("has a hash of:")
-    print(filehash)
+    if args.file:
+        print("your file:")
+        print(filename)
+        print("has a hash of:")
+        print(filehash)
 
