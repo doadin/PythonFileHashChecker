@@ -59,7 +59,7 @@ if args.file and args.list:
         print(filehash)
         print("correct hash is:")
         print(correcthash)
-        # Compair Hashes
+        # Compare Hashes
         if filehash == correcthash:
             print("Hashes match file is safe!")
         else:
