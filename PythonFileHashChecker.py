@@ -3,10 +3,13 @@ import hashlib
 import os
 import sys
 
-parser = argparse.ArgumentParser(description='Check ISO MD5.')
+parser = argparse.ArgumentParser(description='Python Program to check hash or file checksum.')
 parser.add_argument("--file", help="File you want the hash for.")
-parser.add_argument("--hashtype", help="Type of hash you want.(MD5 SHA etc etc..")
+parser.add_argument("--hashtype", help="Type of hash you want.MD5 SHA etc etc..")
 parser.add_argument("--list", help="Text file containing file name + hash to check against.")
+if len(sys.argv)==1:
+    parser.print_help()
+    sys.exit(1)
 args = parser.parse_args()
 
 if args.file:
