@@ -7,8 +7,9 @@ parser = argparse.ArgumentParser(description='Python Program to check hash or'
                                              ' file checksum.')
 parser.add_argument("--file", help="File you want the hash for.")
 parser.add_argument("--hashtype", help="Type of hash you want.MD5 SHA etc etc")
-parser.add_argument("--list", help="Text file containing file name + hash to"
+parser.add_argument("--list", help="Path to a Text file containing file name + hash to"
                                    " check against.")
+parser.add_argument("--save", help="Path to save filename.hashtype to file")
 if len(sys.argv) == 1:
     parser.print_help()
     sys.exit(1)
@@ -29,7 +30,7 @@ else:
         print("--hashtype not supplied defaulting to md5")
         args.hashtype = "MD5"
 
-if args.list:
+if args.file:
     # Generate the selected files hash
     filehash = hashlib.new(args.hashtype)
     with open(args.file, "rb") as f:
@@ -47,9 +48,16 @@ if args.list:
     for line in open(args.list, 'r'):
         if filename in line:
             txtline = line
+else:
+    filenameplushashname = args.file + "." + args.hashtype
+    if os.path.isfile(filenameplushashname):
+        args.list = filenameplushashname
+        for line in open(args.list, 'r'):
+            if filename in line:
+                txtline = line
 
 # If a file and hash list where given compaire
-if args.file and args.list:
+if args.file and args.list and filehash and txtline:
     try:
         fileplushash = txtline.split()
         filenameinlist, correcthash = fileplushash[0], fileplushash[1]
@@ -71,8 +79,12 @@ if args.file and args.list:
         print("has the hash:")
         print(filehash)
 else:
-    if args.file:
+    if args.file and filehash:
         print("your file:")
         print(filename)
         print("has a hash of:")
         print(filehash)
+    if args.save:
+        f = open(args.save + "\\" + filename + "." + args.hashtype, "wb+")
+        f.write(filename + " " + filehash)
+        print(f)
