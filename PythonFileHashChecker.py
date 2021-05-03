@@ -42,12 +42,15 @@ else:
                     print("Found hashtype:  ", args.hashtype)
             if sys.version_info >= (3, 0):
                 if args.hashtype not in hashlib.algorithms_available:
-                    #raise NameError('The algorithm you specified is not supported')
                     print('The algorithm found is not supported')
+                    raise ValueError('The algorithm you specified is not supported')
             else:
                 if args.hashtype not in hashlib.algorithms:
-                    #raise NameError('The algorithm you specified is not supported')
                     print('The algorithm found is not supported')
+                    raise ValueError('The algorithm you specified is not supported')
+        except ValueError as err:
+            #print(err)
+            sys.exit(1)
         except:
             print("Error Reading Hash From Hashlist")
     if args.file and not args.hashtype:
