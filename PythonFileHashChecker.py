@@ -103,6 +103,10 @@ else:
         print("Has a Hash of:", filehash)
     if args.save:
         print("Saving Hash File: ", filename + "." + args.hashtype)
-        f = open(args.save + "\\" + filename + "." + args.hashtype, "wb+")
-        f.write(filename + " " + filehash)
+        if sys.version_info >= (3, 0):
+            f = open(args.save + "\\" + filename + "." + args.hashtype, "w+")
+            f.write(filename + " " + filehash + " " + args.hashtype)
+        else:
+            f = open(args.save + "\\" + filename + "." + args.hashtype, "wb+")
+            f.write(filename + " " + filehash + " " + args.hashtype)            
         #print(f)
