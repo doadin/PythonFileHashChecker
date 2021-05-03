@@ -23,10 +23,12 @@ if args.file:
 if args.hashtype:
     if sys.version_info >= (3, 0):
         if args.hashtype not in hashlib.algorithms_available:
-            raise NameError('The algorithm you specified is not supported')
+            print('The algorithm you specified is not supported')
+            sys.exit(1)
     else:
         if args.hashtype not in hashlib.algorithms:
-            raise NameError('The algorithm you specified is not supported')
+            print('The algorithm you specified is not supported')
+            sys.exit(1)
 else:
     # If hashtype wasnt supplied try and find it in our hash list text file
     if args.file and args.list:
