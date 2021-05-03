@@ -28,7 +28,29 @@ if args.hashtype:
         if args.hashtype not in hashlib.algorithms:
             raise NameError('The algorithm you specified is not supported')
 else:
-    if args.file:
+    # If hashtype wasnt supplied try and find it in our hash list text file
+    if args.file and args.list:
+        try:
+            print("Got file and list searching for hashtype in list...")
+            for line in open(args.list, 'r'):
+                if filename in line:
+                    txtline = line
+                    #print(txtline)
+                    fileplushash = txtline.split()
+                    filenameinlist, correcthash, hashtype = fileplushash[0], fileplushash[1], fileplushash[2]
+                    args.hashtype = hashtype
+                    print("Found hashtype:  ", args.hashtype)
+            if sys.version_info >= (3, 0):
+                if args.hashtype not in hashlib.algorithms_available:
+                    #raise NameError('The algorithm you specified is not supported')
+                    print('The algorithm found is not supported')
+            else:
+                if args.hashtype not in hashlib.algorithms:
+                    #raise NameError('The algorithm you specified is not supported')
+                    print('The algorithm found is not supported')
+        except:
+            print("Error Reading Hash From Hashlist")
+    if args.file and not args.hashtype:
         print("--hashtype not supplied defaulting to md5")
         args.hashtype = "MD5"
 
