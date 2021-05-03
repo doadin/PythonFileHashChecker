@@ -10,6 +10,6 @@ Optionaly you can use:
 
 For example:
 
-    python PythonFileHashChecker.py --file os.iso --list os-iso-hashes.txt --sha256
+    python PythonFileHashChecker.py --file os.iso --list os-iso-hashes.txt --hashtype sha256
 This will get the sha256 of our iso file and look for the file name(os.iso) in the text file and then compaire the hash on the
 same line as the file name to our copy of the file.
