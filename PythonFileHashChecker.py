@@ -10,6 +10,8 @@ parser.add_argument("--hashtype", help="Type of hash you want.MD5 SHA etc etc")
 parser.add_argument("--list", help="Path to a Text file containing file name + hash to"
                                    " check against.")
 parser.add_argument("--save", help="Path to save filename.hashtype to file")
+parser.add_argument("-v", action="store_true", dest="verbose")
+parser.add_argument("-q", action="store_false", dest="verbose")
 if len(sys.argv) == 1:
     parser.print_help()
     sys.exit(1)
