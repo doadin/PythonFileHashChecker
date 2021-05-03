@@ -85,30 +85,24 @@ if args.file and args.list and filehash and txtline:
     try:
         fileplushash = txtline.split()
         filenameinlist, correcthash = fileplushash[0], fileplushash[1]
-        print("the file")
-        print(filename)
-        print("has the hash:")
-        print(filehash)
-        print("correct hash is:")
-        print(correcthash)
+        print("Filename:        ", filename)
+        print("File Hash:       ", filehash)
+        print("Correct Hash:    ", correcthash)
         # Compare Hashes
         if filehash == correcthash:
             print("Hashes match file is safe!")
         else:
-            print(" Hashes DO NOT match file is corrupt!")
+            print("Hashes DO NOT match file is corrupt!")
     except NameError:
         print("File Not Found In List!")
-        print("the file")
-        print(filename)
-        print("has the hash:")
-        print(filehash)
+        print("File:        ", filename)
+        print("Has the Hash:", filehash)
 else:
     if args.file and filehash:
-        print("your file:")
-        print(filename)
-        print("has a hash of:")
-        print(filehash)
+        print("Your File:    ", filename)
+        print("Has a Hash of:", filehash)
     if args.save:
+        print("Saving Hash File: ", filename + "." + args.hashtype)
         f = open(args.save + "\\" + filename + "." + args.hashtype, "wb+")
         f.write(filename + " " + filehash)
-        print(f)
+        #print(f)
