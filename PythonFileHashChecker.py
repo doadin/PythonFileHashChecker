@@ -62,12 +62,19 @@ else:
 if args.file:
     # Generate the selected files hash
     filehash = hashlib.new(args.hashtype)
-    with open(args.file, "rb") as f:
-        while True:
-            buf = f.read(4096)
-            if not buf:
-                break
-            filehash.update(buf)
+    try:
+        with open(args.file, "rb") as f:
+            while True:
+                buf = f.read(4096)
+                if not buf:
+                    break
+                filehash.update(buf)
+    except FileNotFoundError:
+        print("File Doesn't Exist")
+        sys.exit(1)
+    except PermissionError:
+        print("Permissions Not Available")
+        sys.exit(1)
     filehash = filehash.hexdigest()
 
 # If user selected a list
